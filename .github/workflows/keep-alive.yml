@@ -1,0 +1,29 @@
+name: Supabase Keep-Alive Ping
+
+on:
+  schedule:
+    # Runs at 12:00 UTC every single day
+    - cron: '0 12 * * *'
+  workflow_dispatch:
+
+jobs:
+  ping-supabase:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase Database
+        env:
+          SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+        run: |
+          echo "Sending keep-alive request to Supabase API..."
+          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" \
+            -H "apikey: ${SUPABASE_KEY}" \
+            -H "Authorization: Bearer ${SUPABASE_KEY}" \
+            "${SUPABASE_URL}/rest/v1/projects?select=id&limit=1")
+          
+          echo "Supabase HTTP Response Code: ${RESPONSE}"
+          if [ "${RESPONSE}" -ge 200 ] && [ "${RESPONSE}" -lt 500 ]; then
+            echo "Keep-alive ping succeeded. Project remains active."
+          else
+            echo "Warning: Received unexpected status code: ${RESPONSE}"
+          fi

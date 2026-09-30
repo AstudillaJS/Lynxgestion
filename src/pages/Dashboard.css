@@ -1,0 +1,48 @@
+.dashboard {
+    min-height: 100vh;
+    display: flex;
+}
+
+.main-content {
+    flex: 1;
+    margin-left: 0;
+    /* Changed dynamically if needed, but sidebar is drawer style by default on mobile, or pushed? */
+    margin-left: 0;
+    /* Mobile default */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: margin-left 0.3s;
+}
+
+/* On desktop, maybe we want sidebar always visible?
+   User said "menu desplegable al costado del que tiene las tres rallitas" which usually means off-canvas.
+   But typically for dashboard, it might be persistent on large screens.
+   For now, I'll keep it as an overlay drawer for simplicity relative to the "hamburger" request, or I can make it push content.
+*/
+
+.dashboard-header {
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    /* padding-left: 4rem; Space for the toggle button */
+    padding-left: 5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dashboard-header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text);
+}
+
+.content-area {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+@media (min-width: 768px) {
+    /* If we wanted persistent sidebar on desktop */
+}

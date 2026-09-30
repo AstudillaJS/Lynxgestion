@@ -1,0 +1,55 @@
+:root {
+  --color-primary: #0F172A; /* Slate 900 */
+  --color-secondary: #1E293B; /* Slate 800 */
+  --color-accent: #F59E0B; /* Amber 500 */
+  --color-text: #F8FAFC; /* Slate 50 */
+  --color-text-muted: #94A3B8; /* Slate 400 */
+  --color-bg: #020617; /* Slate 950 */
+  --color-danger: #EF4444; /* Red 500 */
+  --color-success: #22C55E; /* Green 500 */
+  --font-sans: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button {
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+input, select {
+  background-color: var(--color-secondary);
+  color: var(--color-text);
+  border: 1px solid var(--color-text-muted);
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input:focus, select:focus {
+  outline: 2px solid var(--color-accent);
+  border-color: transparent;
+}
+
+/* Glassmorphism utilities */
+.glass {
+  background: rgba(30, 41, 59, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card {
+  @extend .glass;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
