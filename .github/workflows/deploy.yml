@@ -1,4 +1,4 @@
-name: Deploy LYNX Gestión to GitHub Pages
+name: Deploy LYNX Gestión
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -34,11 +34,18 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-      - name: Build Application
+      - name: Build Application (dist)
         env:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
         run: npm run build
+
+      - name: Deploy dist branch (gh-pages)
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist
+          branch: gh-pages
+          clean: true
 
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
